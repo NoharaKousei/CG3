@@ -11,6 +11,10 @@ GameScene::~GameScene()
 {
 	delete spriteBG;
 	delete object3d;
+
+	delete sprite1;
+	delete sprite2;
+
 }
 
 void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
@@ -29,6 +33,15 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
 
 	// テクスチャ読み込み
 	Sprite::LoadTexture(1, L"Resources/background.png");
+
+	//テクスチャ2番に読み込み
+	Sprite::LoadTexture(2, L"Resources/texture.png");
+
+	//座標{0,0}に,テクスチャ2番のスプライトを生成
+	sprite1 = Sprite::Create(2, { 0,0 });
+	//座標{500,500}に,テクスチャ2番のスプライトを生成
+	sprite2 = Sprite::Create(2, { 500,500 }, { 1,0,0,1 }, { 0,0 }, false, true);
+
 
 	// 背景スプライト生成
 	spriteBG = Sprite::Create(1, { 0.0f,0.0f });
@@ -65,6 +78,16 @@ void GameScene::Update()
 	}
 
 	object3d->Update();
+
+	//スペースキーを押していたら
+	if (input->PushKey(DIK_SPACE)) {
+		//現在の座標を取得
+		XMFLOAT2 position = sprite1->GetPosition();
+		//移動後の座標を計算
+		position.x += 1.0f;
+		//座標の変更を反映
+		sprite1->SetPosition(position);
+	}
 }
 
 void GameScene::Draw()
@@ -77,6 +100,9 @@ void GameScene::Draw()
 	Sprite::PreDraw(cmdList);
 	// 背景スプライト描画
 	spriteBG->Draw();
+
+	sprite1->Draw();
+	sprite2->Draw();
 
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
