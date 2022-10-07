@@ -2,6 +2,8 @@
 #include "DirectXCommon.h"
 #include "GameScene.h"
 
+//配布
+
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int)
 {
