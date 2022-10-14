@@ -641,7 +641,7 @@ void Object3d::UpdateViewMatrix()
 	//カメラのY軸 (右方向)
 	XMVECTOR cameraAxisY;
 	//Y軸はZ軸→X軸の外積で決まる
-	cameraAxisY = XMVector3Cross(upVector, cameraAxisX);
+	cameraAxisY = XMVector3Cross(cameraAxisZ, cameraAxisX);
 
 	//カメラ回転行列
 	XMMATRIX matCameraRot;
